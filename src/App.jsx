@@ -5,11 +5,12 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import Popup from "./CommonFunction/Popup/Popup";
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <>
-      {/* <KeyBoardPage /> */}
-      <LoginPage />
-      
+      {isLogin ? ( <KeyBoardPage setIsLogin={setIsLogin} /> ) : (
+      <LoginPage setIsLogin={setIsLogin}/>
+      )}
 
     </>
   );

@@ -8,7 +8,7 @@ import ActionsOnTextView from "../../components/ActionsOnTextView/ActionsOnTextV
 import Header from "../../components/Header/Header";
 import Popup from "../../CommonFunction/Popup/Popup";
 import './style.css';                                   
-export default function KeyBoardPage() {
+export default function KeyBoardPage({setIsLogin}) {
   const [text, setText] = useState("");
   const [textStyle, setTextStyle] = useState({});
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -40,7 +40,7 @@ export default function KeyBoardPage() {
   };
   return (
     <>
-      <Header openPopup={openPopup} />
+      <Header openPopup={openPopup} setIsLogin={setIsLogin}/>
 
       <main>
         <div className="flexDiv">

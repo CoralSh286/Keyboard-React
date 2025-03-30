@@ -1,11 +1,12 @@
-const setUsers = (users) => {
-  const usersString = JSON.stringify(users);
+const setUsers = () => {
+  localStorage.clear(); // Clear existing data
   const defaultUsers = [
     { username: "coral", password: "123" },
     { username: "avi", password: "123" }
   ];
   
-  localStorage.setItem("users", defaultUsers);
+  const usersString = JSON.stringify(defaultUsers);
+  localStorage.setItem("users", usersString);
 }
 
 const addFileToUser = (userId, file) => {
@@ -37,7 +38,14 @@ const getUsers = () => {
   }
   return [];
 }
-
+const checkLogin  = (username, password) => {
+  const usersString = localStorage.getItem("users");
+  if (usersString) {
+    const users = JSON.parse(usersString);
+    return users.some(user => user.username === username && user.password === password);
+  }
+  return false;
+}
 
 const getFileByName = (userId, fileName) => {
   const usersString = localStorage.getItem("users");
@@ -50,3 +58,5 @@ const getFileByName = (userId, fileName) => {
   }
   return null;
 }   
+
+export { setUsers, addFileToUser, removeFileFromUser, getUsers, getFileByName,checkLogin };

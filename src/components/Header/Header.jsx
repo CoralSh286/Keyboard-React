@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FaUser, FaSignOutAlt, FaSave, FaFile } from "react-icons/fa";
 import "./style.css";
 
-export default function Header() {
+export default function Header({setIsLogin}) {
   const [userName, setUserName] = useState("John Doe");
   const [userCards, setUserCards] = useState([]);
 
@@ -24,9 +24,7 @@ export default function Header() {
   }, []);
 
   const handleLogout = () => {
-    // Implement logout functionality
-    console.log("User logged out");
-    // You might want to clear some local storage data or redirect
+    setIsLogin(false)
   };
 
   const handleSaveFile = () => {
