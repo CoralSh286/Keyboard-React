@@ -1,0 +1,119 @@
+/* SearchInChars Component Styles */
+.search-chars-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    background-color: #121212;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .search-input-wrapper {
+    display: flex;
+    width: 100%;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1px solid #333;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #2c62ea;
+    box-shadow: 0 0 0 1px rgba(44, 98, 234, 0.5);
+  }
+  
+  .search-input::placeholder {
+    color: #666;
+  }
+  
+  .search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    background-color: #2c62ea;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #3a70f8;
+  }
+  
+  .search-button:disabled {
+    background-color: #333;
+    cursor: not-allowed;
+  }
+  
+  .search-icon {
+    font-size: 14px;
+  }
+  
+  /* Search Results Styles */
+  .search-results {
+    margin-top: 16px;
+    border-top: 1px solid #333;
+    padding-top: 12px;
+  }
+  
+  .results-count {
+    font-size: 14px;
+    color: #e0e0e0;
+    margin: 0 0 12px 0;
+  }
+  
+  .matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+  
+  .matches-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .matches-list::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 3px;
+  }
+  
+  .matches-list::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 3px;
+  }
+  
+  .match-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #1e1e1e;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  
+  .match-index {
+    color: #999;
+  }
+  
+  .match-text {
+    color: #e0e0e0;
+    font-weight: 500;
+  }

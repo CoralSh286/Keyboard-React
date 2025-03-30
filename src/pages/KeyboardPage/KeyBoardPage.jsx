@@ -23,7 +23,7 @@ export default function KeyBoardPage() {
          <div className="flexDiv">
            <ChangeAllText setText={setText} text={text} setTextStyle={setTextStyle} />
            <TextView text={text} style={textStyle} />
-         <ActionsOnTextView openPopup={openPopup}/>
+         <ActionsOnTextView text={text} openPopup={openPopup}/>
          </div>
          <KeyBoard setText={setText} />
        </main>
