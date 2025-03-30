@@ -1,0 +1,42 @@
+.textView {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    height: 200px;
+    width: 50%;
+    overflow: auto;
+    font-size: 18px;
+    background-color: #252525;
+    position: relative;
+    transition: border 0.3s ease-in-out;
+}
+
+.textView:focus-within {
+    border-color: #007bff;
+}
+
+.placeholder {
+    opacity: 0.6;
+    font-size: 18px;
+    color: #999;
+    pointer-events: none;
+    display: inline-block;
+    padding-block: 0;
+    margin-block:0 ;
+}
+
+.marker {
+    background-color: black;
+    display: inline-block;
+    width: 2px;
+    height: 20px;
+    display: inline-block;
+    margin-left: 5px;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}

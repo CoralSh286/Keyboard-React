@@ -1,0 +1,5 @@
+{
+    "Colors": ["black","red", "green", "blue", "yellow", "pink"],
+    "Size": ["20px", "22px", "24px", "28px", "30px"],
+    "Fonts": ["Arial", "Helvetica", "Times", "Courier", "Verdana"]
+}

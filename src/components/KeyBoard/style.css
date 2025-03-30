@@ -1,0 +1,114 @@
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    background-color: #e3e3e3;
+    border-radius: 10px;
+    width: 80%;
+  }
+  .keyboard *{
+    
+    font-family: "Segoe UI", Arial, sans-serif;
+    /* font-family: "Courier New", monospace; */
+  }
+  .row {
+    display: grid;
+    gap: 5px;
+  }
+  .row>*{
+    font-size: 16px;
+height: 50px;
+  }
+  .row:nth-child(1) { grid-template-columns: repeat(13, 1fr) 1.5fr; }
+  .row:nth-child(2) { grid-template-columns: 1.5fr repeat(12, 1fr) 1.5fr; }
+  .row:nth-child(3) { grid-template-columns: 2fr repeat(11, 1fr) 2.5fr; }
+  .row:nth-child(4) { grid-template-columns: 2.5fr repeat(10, 1fr) 2.5fr; }
+  .row:nth-child(5) { grid-template-columns: 1.5fr 1.5fr 5fr 2fr 1.5fr}
+  
+
+  .key.space {
+    grid-column: span 6;
+  }
+  
+  .key.shift, .key.capslock, .key.enter, .key.tab, .key.backspace, .key.ctrl, .key.alt, .key.backslash {
+    text-transform: uppercase;
+  }
+  
+  .key.shift { grid-column: span 2; }
+  .key.capslock { grid-column: span 2; }
+  .key.enter { grid-column: span 2.5; }
+  .key.tab { grid-column: span 1.5; }
+  .key.backspace { grid-column: span 1.5; }
+  .key.backslash { grid-column: span 1.5; }
+  .key.ctrl, .key.alt { grid-column: span 1.5; }
+  /* ------------------------------------------------ */
+  .keyboard.Glow {
+    display: flex;
+    flex-direction: column;
+    background: #111;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+
+.keyboard.Glow .keyBoardBtn {
+    background: linear-gradient(135deg, #222, #333);
+    border: 1px solid #444;
+    color: white;
+    font-size: 16px;
+    padding: 12px 18px;
+    min-width: 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    position: relative;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+}
+
+/* אפקט תאורת לד לכל הכפתורים */
+.keyboard.Glow .keyBoardBtn::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 5px;
+    z-index: -1;
+    filter: blur(10px);
+    animation: glow 3s infinite linear;
+}
+
+/* אפקט מעבר צבעים ללדים */
+@keyframes glow {
+    0% { box-shadow: 0 0 15px red; }
+    25% { box-shadow: 0 0 15px blue; }
+    50% { box-shadow: 0 0 15px green; }
+    75% { box-shadow: 0 0 15px purple; }
+    100% { box-shadow: 0 0 15px red; }
+}
+
+/* אפקט ריחוף */
+.keyboard.Glow .keyBoardBtn:hover {
+    background: linear-gradient(135deg, #444, #555);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* אפקט לחיצה */
+.keyboard.Glow .keyBoardBtn:active {
+    transform: scale(0.9);
+    background: linear-gradient(135deg, #111, #222);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* עיצוב מיוחד לכפתורי הגדרות */
+.keyboard.Glow .KeyBtnSelect {
+    color: cyan;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid cyan;
+    border-radius: 5px;
+    background: rgba(0, 255, 255, 0.1);
+    text-align: center;
+}
