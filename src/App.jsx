@@ -6,10 +6,11 @@ import Popup from "./CommonFunction/Popup/Popup";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState({});
   return (
     <>
-      {isLogin ? ( <KeyBoardPage setIsLogin={setIsLogin} /> ) : (
-      <LoginPage setIsLogin={setIsLogin}/>
+      {isLogin ? ( <KeyBoardPage user={user} setIsLogin={setIsLogin} /> ) : (
+      <LoginPage setUser={setUser} setIsLogin={setIsLogin}/>
       )}
 
     </>

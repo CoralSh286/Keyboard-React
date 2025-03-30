@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "./style.css"; // Assuming you have a CSS file for styling
-import { checkLogin, setUsers } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
+import { addNewUser, checkIfUserExists, checkLogin, getUserByName } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
 
-export default function LoginPage({ setIsLogin }) {
+export default function LoginPage({ setIsLogin , setUser }) {
   // State for form inputs
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,11 +20,12 @@ export default function LoginPage({ setIsLogin }) {
     
     // Check login credentials
     const userAuth = checkLogin(username, password);
-    
+    const user = getUserByName(username);
     if (userAuth) {
       // Successful login
       setError('');
       setIsLogin(true);
+      setUser(user); // Set user in state
     } else {
       // Failed login
       setError('Invalid username or password');
@@ -32,10 +33,24 @@ export default function LoginPage({ setIsLogin }) {
   };
   
   // Function to create default users
-  const handleRegisterDefaultUsers = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-
-    setUsers();
+    if(!username || !password) {
+      setError('Please enter both username and password');
+      return;
+    }
+    if(checkIfUserExists(username)) {
+      setError('Username already exists. Please choose another one.');
+      return;
+    }
+    const newUser = {
+      username: username,
+      password: password,
+      files: [], // Initialize with empty files array
+    };
+  addNewUser(newUser);
+  setUser(newUser); // Set user in state
+  setIsLogin(true); // Set login state to true on registration
     setError('');
   };
 
@@ -74,12 +89,12 @@ export default function LoginPage({ setIsLogin }) {
         </form>
         
         <div className="register-section">
-          <p className="register-text">Dont have an account?</p>
+          <p className="register-text">OR </p>
           <button 
-            className="register-button secondary-button" 
-            onClick={handleRegisterDefaultUsers}
+            className="login-button primary-button" 
+            onClick={handleRegister}
           >
-            Register Default Users
+            Register
           </button>
         </div>
       </div>
