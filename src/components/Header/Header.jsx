@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { FaUser, FaSignOutAlt, FaSave, FaFile } from "react-icons/fa";
 import "./style.css";
+import SaveFilePopUp from "../SaveFilePopUp/SaveFilePopUp";
 
-export default function Header({ setIsLogin, user }) {
+export default function Header({ setIsLogin, user, text , openPopup , onClose}) {
   // We'll use user.files directly instead of fetching from localStorage
   const [userFiles, setUserFiles] = useState([]);
 
@@ -22,11 +23,7 @@ export default function Header({ setIsLogin, user }) {
   };
 
   const handleSaveFile = () => {
-    // Implementation would depend on how you want to update the user's files
-    console.log("File saved");
-    
-    // This would need to update the actual user object in your parent component
-    // You might need to pass a callback from the parent component to do this
+    openPopup(<SaveFilePopUp onClose={onClose} file={text} userName={user.username}  />);
   };
 
   return (

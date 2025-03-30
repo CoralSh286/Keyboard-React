@@ -40,7 +40,7 @@ export default function KeyBoardPage({setIsLogin , user}) {
   };
   return (
     <>
-      <Header text={text} user={user} openPopup={openPopup} setIsLogin={setIsLogin}/>
+      <Header text={text} user={user} onClose={()=>{setIsPopupOpen(false)}} openPopup={openPopup} setIsLogin={setIsLogin}/>
 
       <main>
         <div className="flexDiv">
