@@ -1,0 +1,112 @@
+/* ReplaceText Component Styles */
+.replace-text-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    background-color: #121212;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .replace-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  
+  .replace-label {
+    color: #e0e0e0;
+    font-size: 14px;
+    width: 100px;
+    margin-right: 8px;
+  }
+  
+  .replace-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  
+  .replace-input:focus {
+    outline: none;
+    border-color: #2c62ea;
+    box-shadow: 0 0 0 1px rgba(44, 98, 234, 0.5);
+  }
+  
+  .replace-input::placeholder {
+    color: #666;
+  }
+  
+  .occurrences-badge {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #2c62ea;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    min-width: 18px;
+    text-align: center;
+  }
+  
+  .replace-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  
+  .replace-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+  }
+  
+  .replace-button:hover {
+    background-color: #2a2a2a;
+  }
+  
+  .replace-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #1e1e1e;
+  }
+  
+  .replace-button.replace-all {
+    background-color: #2c62ea;
+    color: white;
+    border-color: #2558d4;
+  }
+  
+  .replace-button.replace-all:hover {
+    background-color: #3a70f8;
+  }
+  
+  .replace-button.replace-all:disabled {
+    background-color: #2c62ea;
+    opacity: 0.5;
+  }
+  
+  .replace-icon {
+    font-size: 14px;
+  }

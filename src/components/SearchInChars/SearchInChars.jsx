@@ -3,7 +3,6 @@ import { FaSearch } from 'react-icons/fa';
 import './style.css';
 
 export default function SearchInChars({ text }) {
-    console.log("text", text);
     
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
