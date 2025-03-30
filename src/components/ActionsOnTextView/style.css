@@ -1,0 +1,35 @@
+.actions-container {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+    background-color: #121212;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .action-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: #1e1e1e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .action-button:hover {
+    background-color: #333333;
+  }
+  
+  .action-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #4d4d4d;
+  }
+  
+  .action-icon {
+    color: #b3b3b3;
+    margin-right: 6px;
+  }
