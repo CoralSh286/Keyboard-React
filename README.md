@@ -1,8 +1,24 @@
-# React + Vite
+# React Keyboard & Rich Text Editor Component
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This React component provides an interactive on-screen keyboard integrated with a rich text editor. It includes user authentication, allowing different users to have their own saved fields stored in local storage.
 
-Currently, two official plugins are available:
+## Features
+- **On-Screen Keyboard**: A customizable virtual keyboard for text input.
+- **Rich Text Editor**: Supports formatted text, bold, italic, underline, and more.
+- **User Authentication**: Allows users to log in and maintain separate sessions.
+- **Per-User Fields**: User-specific data is saved in local storage for persistence.
+- **Local Storage Integration**: Saves user input and preferences persistently.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+```sh
+npm install 
+```
+
+## How It Works
+1. **Login**: Users must log in to access their saved data.
+2. **Editor & Keyboard**: Users can type using the rich text editor or the on-screen keyboard.
+3. **Save & Load**: Content is saved in local storage per user and automatically loaded upon login.
+
+## Dependencies
+- **React**: UI framework.
