@@ -5,11 +5,9 @@ import { FaUser, FaSignOutAlt, FaSave, FaFile } from "react-icons/fa";
 import "./style.css";
 import SaveFilePopUp from "../SaveFilePopUp/SaveFilePopUp";
 
-export default function Header({ setIsLogin, user, text , openPopup , onClose}) {
-  // We'll use user.files directly instead of fetching from localStorage
-  const [userFiles, setUserFiles] = useState([]);
+export default function Header({ setIsLogin, setUser, user, text , openPopup , onClose}) {
+  const [userFiles, setUserFiles] = useState(user.files);
 
-  // Update component state when user prop changes
   useEffect(() => {
     if (user && user.files) {
       setUserFiles(user.files);
@@ -23,7 +21,7 @@ export default function Header({ setIsLogin, user, text , openPopup , onClose}) 
   };
 
   const handleSaveFile = () => {
-    openPopup(<SaveFilePopUp onClose={onClose} file={text} userName={user.username}  />);
+    openPopup(<SaveFilePopUp onClose={onClose} file={text} userName={user.username}  setUser={setUser}/>);
   };
 
   return (
@@ -38,7 +36,7 @@ export default function Header({ setIsLogin, user, text , openPopup , onClose}) 
           userFiles.map((file, index) => (
             <div key={index} className="file-card">
               <FaFile className="file-icon" />
-              <span className="file-name">{file}</span>
+              <span className="file-name">{file.name}</span>
             </div>
           ))
         ) : (

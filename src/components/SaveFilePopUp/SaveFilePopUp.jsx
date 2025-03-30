@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { FaSave } from 'react-icons/fa';
-import { addNewFileToUser } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
+import { addNewFileToUser, getUserByName } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
 import './style.css';
 import { extractStyleAndText } from '../../CommonFunction/ExtarctTextAndStyle/extarctTextAndStyle';
 
-export default function SaveFilePopUp({ file, userName, onClose }) {
+export default function SaveFilePopUp({ file, userName, onClose ,setUser}) {
   const [fileName, setFileName] = useState('');
   const [error, setError] = useState('');
 
@@ -21,7 +21,7 @@ export default function SaveFilePopUp({ file, userName, onClose }) {
       name: fileName,
       content: fileData
     });
-    
+    setUser(getUserByName(userName))
     if (result) {
       if (onClose) onClose();
     } else {

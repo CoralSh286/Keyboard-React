@@ -9,7 +9,7 @@ function App() {
   const [user, setUser] = useState({});
   return (
     <>
-      {isLogin ? ( <KeyBoardPage user={user} setIsLogin={setIsLogin} /> ) : (
+      {isLogin ? ( <KeyBoardPage user={user} setUser={setUser} setIsLogin={setIsLogin} /> ) : (
       <LoginPage setUser={setUser} setIsLogin={setIsLogin}/>
       )}
 
