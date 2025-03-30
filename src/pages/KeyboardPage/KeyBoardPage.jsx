@@ -4,20 +4,35 @@ import TextView from "../../components/TextView/TextView";
 import ChangeAllText from "../../components/ChangeAllText/ChangeAllText";
 import ActionsOnTextView from '../../components/ActionsOnTextView/ActionsOnTextView';
 import Header from '../../components/Header/Header';
+import Popup from '../../CommonFunction/Popup/Popup';
 export default function KeyBoardPage() {
       const [text, setText] = useState("");
       const [textStyle, setTextStyle] = useState({});
+      const [isPopupOpen, setIsPopupOpen] = useState(false);
+      const [popupContent, setPopupContent] = useState(null);
+    
+      const openPopup = (content) => {
+        setPopupContent(content);
+        setIsPopupOpen(true);
+      };
+    
   return (
     <>
-    <Header/>
+    <Header openPopup={openPopup}/>
        <main>
          <div className="flexDiv">
-         <ActionsOnTextView/>
            <ChangeAllText setText={setText} text={text} setTextStyle={setTextStyle} />
            <TextView text={text} style={textStyle} />
+         <ActionsOnTextView openPopup={openPopup}/>
          </div>
          <KeyBoard setText={setText} />
        </main>
+       <Popup 
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+      >
+        {popupContent}
+      </Popup>
     </>
   )
 }

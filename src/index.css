@@ -1,5 +1,12 @@
-
+@font-face {
+  font-family: 'Roberto';
+  src: url(../public/fonts/Roboto/static/Roboto_Condensed-Regular.ttf);
+}
 body {
+  font-family: Roberto;
   margin: 0;
 }
+*{
+  font-family: Roberto;
 
+}

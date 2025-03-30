@@ -1,12 +1,17 @@
-import React from 'react';
-import { FaUndo, FaSearch, FaExchangeAlt } from 'react-icons/fa';
-import './style.css';
+/** @format */
 
-export default function ActionsOnTextView() {
+import React from "react";
+import { FaUndo, FaSearch, FaExchangeAlt } from "react-icons/fa";
+import "./style.css";
+
+export default function ActionsOnTextView({ openPopup }) {
+  const handleUndo = () => {
+    openPopup(<>Undo action performed!</>);
+  };
   return (
     <div className="actions-container">
       <button className="action-button">
-        <FaUndo className="action-icon" />
+        <FaUndo className="action-icon" onClick={handleUndo} />
         <span>Undo</span>
       </button>
       <button className="action-button">
