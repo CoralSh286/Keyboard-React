@@ -7,7 +7,7 @@ import ChangeAllText from "../../components/ChangeAllText/ChangeAllText";
 import ActionsOnTextView from "../../components/ActionsOnTextView/ActionsOnTextView";
 import Header from "../../components/Header/Header";
 import Popup from "../../CommonFunction/Popup/Popup";
-
+import './style.css';                                   
 export default function KeyBoardPage() {
   const [text, setText] = useState("");
   const [textStyle, setTextStyle] = useState({});
