@@ -7,15 +7,31 @@ import ChangeAllText from "../../components/ChangeAllText/ChangeAllText";
 import ActionsOnTextView from "../../components/ActionsOnTextView/ActionsOnTextView";
 import Header from "../../components/Header/Header";
 import Popup from "../../CommonFunction/Popup/Popup";
-import './style.css';                                   
-export default function KeyBoardPage({setIsLogin , user , setUser}) {
-  const [text, setText] = useState("");
-  const [textStyle, setTextStyle] = useState({});
+import "./style.css";
+import convertToReactElements from "../../CommonFunction/ConvertToReactElements/ConvertToReactElements";
+export default function KeyBoardPage({ setIsLogin, user, setUser }) {
+  const [fileNameFocus, setFileNameFocus] = useState(
+    user.files[user.files.length - 1]?.name || ""
+  );
+  const [text, setText] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState(null);
   const [change, setChange] = useState([]);
-
-  // Function to open popup
+  const [files, setFiles] = useState(user.files);
+  useEffect(() => {
+    // Check if user is logged in and has files
+    if (user && user.files && user.files.length > 0) {
+      setFiles(user.files);
+    } else {
+      setFiles([]); // Set to empty array if no files exist
+    }
+  }, []);
+  useEffect(() => {
+  
+  setText(
+    convertToReactElements(files.find((file) => file.name === fileNameFocus)?.content) || []
+  );
+  },[files])
   const openPopup = (content) => {
     setPopupContent(content);
     setIsPopupOpen(true);
@@ -38,18 +54,72 @@ export default function KeyBoardPage({setIsLogin , user , setUser}) {
     setText(newText);
     // This doesn't update the change history
   };
+
+  const handleCloseFile = (index) => {
+    const updatedFiles = [...files];
+    updatedFiles.splice(index, 1);
+    setFiles(updatedFiles);
+  };
+
+
   return (
     <>
-      <Header text={text} user={user} onClose={()=>{setIsPopupOpen(false)}} setUser={setUser} openPopup={openPopup} setIsLogin={setIsLogin}/>
+      <Header
+        text={text}
+        user={user}
+        onClose={() => {
+          setIsPopupOpen(false);
+        }}
+        setFiles={setFiles}
+        setFileNameFocus={setFileNameFocus}
+        setUser={setUser}
+        openPopup={openPopup}
+        setIsLogin={setIsLogin}
+      />
 
       <main>
         <div className="flexDiv">
           <ChangeAllText
             setText={setNewText}
             text={text}
-            setTextStyle={setTextStyle}
+         
           />
-          <TextView text={text} style={textStyle} />
+
+          <div className="filesContainer">
+            {files.length > 0 ? (
+              files.map((file, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setText(convertToReactElements(file.content));
+                    setFileNameFocus(file.name);
+                  }}
+                  className={`fileContainer ${
+                    fileNameFocus == file.name ? "fileNameFocus" : ""
+                  }`}
+                >
+                  <h3>{file.name}</h3>
+                  <button
+                    className="closeBtn"
+                    onClick={() => handleCloseFile(index)}
+                    aria-label="Close file"
+                  ></button>
+                  <TextView
+                    isOnFocus={fileNameFocus == file.name}
+                    text={
+                      fileNameFocus == file.name
+                        ? text
+                        : convertToReactElements(file.content) || []
+                    }
+                    style={{}}
+                  />
+                </div>
+              ))
+            ) : (
+              <TextView text={text}  />
+            )}
+          </div>
+
           <ActionsOnTextView
             setChange={setChange}
             change={change}

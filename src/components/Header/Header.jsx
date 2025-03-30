@@ -5,7 +5,7 @@ import { FaUser, FaSignOutAlt, FaSave, FaFile } from "react-icons/fa";
 import "./style.css";
 import SaveFilePopUp from "../SaveFilePopUp/SaveFilePopUp";
 
-export default function Header({ setIsLogin, setUser, user, text , openPopup , onClose}) {
+export default function Header({ setIsLogin, setUser, user, text ,setFiles, openPopup , onClose,setFileNameFocus}) {
   const [userFiles, setUserFiles] = useState(user.files);
 
   useEffect(() => {
@@ -23,7 +23,16 @@ export default function Header({ setIsLogin, setUser, user, text , openPopup , o
   const handleSaveFile = () => {
     openPopup(<SaveFilePopUp onClose={onClose} file={text} userName={user.username}  setUser={setUser}/>);
   };
-
+  const openNewFile = (file) => {
+    setFileNameFocus(file.name);
+    setFiles(perv=>{
+      if(perv.length === 0) return [file]
+      const index = perv.findIndex(f => f.name === file.name);
+      if(index !== -1) return [...perv]
+      if(index === -1) return [...perv, file]
+  })
+  
+  }
   return (
     <header className="header">
       <div className="user-info">
@@ -34,7 +43,7 @@ export default function Header({ setIsLogin, setUser, user, text , openPopup , o
       <div className="user-files">
         {userFiles && userFiles.length > 0 ? (
           userFiles.map((file, index) => (
-            <div key={index} className="file-card">
+            <div key={index} className="file-card" onClick={(file)=>{openNewFile(file)}}>
               <FaFile className="file-icon" />
               <span className="file-name">{file.name}</span>
             </div>

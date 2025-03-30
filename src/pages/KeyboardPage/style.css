@@ -22,3 +22,102 @@ main{
     justify-content: center;
     gap: 2%;
 }
+
+.filesContainer{
+    width: 60%;
+    display: flex;
+    gap: 10px;
+
+}
+.fileContainer {
+    flex: 1;
+    position: relative;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .fileNameFocus{
+    outline: 1px solid #fff;
+    outline-offset: -2px;
+    transform: scale(1.25);
+  }
+  .fileContainer:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-color: #666;
+  }
+  
+  .fileContainer h3 {
+    color: #e0e0e0;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+    font-size: 18px;
+    padding-right: 30px; /* Make room for close button */
+  }
+  
+  /* Close button styling */
+  .fileContainer .closeBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    transition: all 0.2s ease;
+    z-index: 2;
+  }
+  
+  .fileContainer .closeBtn:hover {
+    color: #ff4d4d;
+    transform: scale(1.1);
+  }
+  
+  .fileContainer .closeBtn::before,
+  .fileContainer .closeBtn::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    background-color: currentColor;
+  }
+  
+  .fileContainer .closeBtn::before {
+    transform: rotate(45deg);
+  }
+  
+  .fileContainer .closeBtn::after {
+    transform: rotate(-45deg);
+  }
+  
+  /* For when a file is active/selected */
+  .fileContainer.active {
+    border-color: #8a2be2;
+    background-color: #32323a;
+  }
+  
+  /* Optional: Add some animation when files appear */
+  @keyframes fileAppear {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fileContainer {
+    animation: fileAppear 0.3s ease forwards;
+  }

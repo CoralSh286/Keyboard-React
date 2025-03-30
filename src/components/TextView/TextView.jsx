@@ -1,12 +1,12 @@
 import React from 'react'
 import './style.css'
-export default function TextView(props) {
-
+export default function TextView({ text , isOnFocus}) {
+    
     return (
-        <div className='textView' style={props.style}>
-            {props.text && props.text}
+        <div className={`textView ${isOnFocus ? "isOnFocus" : ""}`} >
+            {text}
             <span className='marker'></span>
-            {(!props.text || props.text?.length === 0 ) &&<p className='placeholder'>Start typing... </p>}
+            {(!text || text?.length === 0 ) &&<p className='placeholder'>Start typing... </p>}
         </div>
     )
 }

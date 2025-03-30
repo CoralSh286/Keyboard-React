@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import options from "./options.json"; 
 
-export default function ChangeAllText({ setTextStyle , text , setText }) {
+export default function ChangeAllText({  text , setText }) {
   const [style , setStyle] = useState({
     color:"black",
     fontSize:"20px",
