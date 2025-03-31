@@ -28,8 +28,6 @@ const addNewFileToUser = (username, fileData) => {
     const newFile = {
       name: fileData.name,
       content: fileData.content,
-      id: Date.now(),
-      createdAt: new Date().toISOString()
     };
     
     // Test if it can be serialized
@@ -47,12 +45,12 @@ const addNewFileToUser = (username, fileData) => {
     return false;
   }
 };
-const removeFileFromUser = (userId, fileId) => {
+const removeFileFromUser = (userName, fileName) => {
   
         const users = getUsers()
-        const user = users.find(user => user.id === userId);
+        const user = users.find(user => user.userName === userName);
         if (user) {
-        user.files = user.files.filter(file => file.id !== fileId);
+        user.files = user.files.filter(file => file.name !== fileName);
         setUsers(users);
         }
     
@@ -81,18 +79,57 @@ const checkIfUserExists = (username) => {
   const users = getUsers();
   return users.some(user => user.username === username);
 }
-const getFileByName = (userId, fileName) => {
 
-    const users = getUsers
-    const user = users.find(user => user.id === userId);
-    if (user) {
-      return user.files.find(file => file.name === fileName);
-    }
+const changeFileByName = (userName, fileName, fileContent) => {
+  if (!userName || !fileName || fileContent === undefined) {
+    console.error("Missing required parameters for ");
+    return false;
+  }
   
-  return null;
-}   
+  try {
+    // Get all users
+    const users = getUsers();
+    debugger
+    // Find the user
+    const userIndex = users.findIndex(user => user.username === userName);
+    
+    if (userIndex === -1) {
+      console.error(`User '${userName}' not found`);
+      return false;
+    }
+    
+    const user = users[userIndex];
+    
+    // Check if user has any files
+    if (!user.files || !Array.isArray(user.files)) {
+      console.error(`User '${userName}' has no files array`);
+      return false;
+    }
+    
+    // Find the file by name
+    const fileIndex = user.files.findIndex(file => file.name === fileName);
+    
+    if (fileIndex === -1) {
+      console.error(`File '${fileName}' not found for user '${userName}'`);
+      return false;
+    }
+    
+    // Update the file content
+    users[userIndex].files[fileIndex].content = fileContent;
+    
+    // Save the updated users array back to localStorage
+    setUsers(users);
+    
+    return true;
+  } catch (error) {
+    console.error("Error in :", error);
+    return false;
+  }
+};
 const getUserByName = (username) => {
   const users = getUsers();
   return users.find(user => user.username === username);
 }
-export { setUsers, addNewFileToUser, removeFileFromUser, getUsers, getFileByName,checkLogin,addNewUser ,checkIfUserExists,getUserByName};
+
+
+export { setUsers, addNewFileToUser,changeFileByName, removeFileFromUser, getUsers,checkLogin,addNewUser ,checkIfUserExists,getUserByName};

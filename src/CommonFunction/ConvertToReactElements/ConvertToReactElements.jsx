@@ -1,16 +1,38 @@
+/**
+ * Converts various data formats to React elements
+ * @param {Array|Object|string|null|undefined} data - The data to convert
+ * @returns {React.ReactNode} - The converted React elements
+ */
 const convertToReactElements = (data) => {
-    if (Array.isArray(data)) {
-      return data.map((item, index) => (
+  // Handle null or undefined cases
+  if (data === null || data === undefined) {
+    return [];
+  }
+  
+  // Handle array of text objects
+  if (Array.isArray(data)) {
+    if (data.length === 0) {
+      return [];
+    }
+    
+    return data.map((item, index) => {
+      if (!item) return null;
+      
+      return (
         <span key={index} style={item.style || {}}>
           {item.text || ""}
         </span>
-      ));
-    }
+      );
+    }).filter(Boolean); // Filter out null items
+  }
 
-    if (data && typeof data === "object" && data.text !== undefined) {
-      return <span style={data.style || {}}>{data.text || ""}</span>;
-    }
+  // Handle single text object
+  if (typeof data === "object" && data.text !== undefined) {
+    return <span style={data.style || {}}>{data.text || ""}</span>;
+  }
 
-    return data;
-  };
-  export default convertToReactElements;
+  // Handle string or other primitive types
+  return data;
+};
+
+export default convertToReactElements;

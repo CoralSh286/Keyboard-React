@@ -2,36 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 import KeyBoard from "../../components/KeyBoard/KeyBoard";
-import TextView from "../../components/TextView/TextView";
 import ChangeAllText from "../../components/ChangeAllText/ChangeAllText";
 import ActionsOnTextView from "../../components/ActionsOnTextView/ActionsOnTextView";
 import Header from "../../components/Header/Header";
 import Popup from "../../CommonFunction/Popup/Popup";
 import "./style.css";
-import convertToReactElements from "../../CommonFunction/ConvertToReactElements/ConvertToReactElements";
+import TextViewsContainer from "../../components/TextViewsContainer/TextViewsContainer";
+import { changeFileByName, getUserByName } from "../../CommonFunction/SetLocalStorageData/setLocalStorageData";
+import { extractStyleAndText } from "../../CommonFunction/ExtarctTextAndStyle/extarctTextAndStyle";
 export default function KeyBoardPage({ setIsLogin, user, setUser }) {
-  const [fileNameFocus, setFileNameFocus] = useState(
-    user.files[user.files.length - 1]?.name || ""
-  );
+  const [fileNameFocus, setFileNameFocus] = useState([]);
   const [text, setText] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState(null);
   const [change, setChange] = useState([]);
-  const [files, setFiles] = useState(user.files);
-  useEffect(() => {
-    // Check if user is logged in and has files
-    if (user && user.files && user.files.length > 0) {
-      setFiles(user.files);
-    } else {
-      setFiles([]); // Set to empty array if no files exist
-    }
-  }, []);
-  useEffect(() => {
-  
-  setText(
-    convertToReactElements(files.find((file) => file.name === fileNameFocus)?.content) || []
-  );
-  },[files])
+  const [filesOpen, setFilesOpen] = useState([]);
+
+
   const openPopup = (content) => {
     setPopupContent(content);
     setIsPopupOpen(true);
@@ -42,24 +29,34 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
     if (typeof newText === "function") {
       setText((currentText) => {
         const updatedText = newText(currentText);
+        if (fileNameFocus != "") {
+          user.files?.find(file => file.name == fileNameFocus)
+        }
+        if (fileNameFocus != "") {
+          const fileData = extractStyleAndText(updatedText)
+
+          changeFileByName(user.username, fileNameFocus, fileData)
+          setUser(getUserByName(user.username))
+        }
         setChange((prevChange) => [...prevChange, updatedText]);
         return updatedText;
       });
     } else {
       setText(newText);
+      if (fileNameFocus != "") {
+        const fileData = extractStyleAndText(newText)
+        changeFileByName(user.username, fileNameFocus, fileData)
+        setUser(getUserByName(user.username))
+      }
       setChange((prevChange) => [...prevChange, newText]);
     }
+
   };
   const setTextWithoutHistory = (newText) => {
     setText(newText);
     // This doesn't update the change history
   };
 
-  const handleCloseFile = (index) => {
-    const updatedFiles = [...files];
-    updatedFiles.splice(index, 1);
-    setFiles(updatedFiles);
-  };
 
 
   return (
@@ -70,7 +67,7 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
         onClose={() => {
           setIsPopupOpen(false);
         }}
-        setFiles={setFiles}
+        setFilesOpen={setFilesOpen}
         setFileNameFocus={setFileNameFocus}
         setUser={setUser}
         openPopup={openPopup}
@@ -82,44 +79,9 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
           <ChangeAllText
             setText={setNewText}
             text={text}
-         
+
           />
-
-          <div className="filesContainer">
-            {files.length > 0 ? (
-              files.map((file, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    setText(convertToReactElements(file.content));
-                    setFileNameFocus(file.name);
-                  }}
-                  className={`fileContainer ${
-                    fileNameFocus == file.name ? "fileNameFocus" : ""
-                  }`}
-                >
-                  <h3>{file.name}</h3>
-                  <button
-                    className="closeBtn"
-                    onClick={() => handleCloseFile(index)}
-                    aria-label="Close file"
-                  ></button>
-                  <TextView
-                    isOnFocus={fileNameFocus == file.name}
-                    text={
-                      fileNameFocus == file.name
-                        ? text
-                        : convertToReactElements(file.content) || []
-                    }
-                    style={{}}
-                  />
-                </div>
-              ))
-            ) : (
-              <TextView text={text}  />
-            )}
-          </div>
-
+          <TextViewsContainer fileNameFocus={fileNameFocus} filesOpen={filesOpen} setFileNameFocus={setFileNameFocus} setFilesOpen={setFilesOpen} setText={setText} text={text} />
           <ActionsOnTextView
             setChange={setChange}
             change={change}
