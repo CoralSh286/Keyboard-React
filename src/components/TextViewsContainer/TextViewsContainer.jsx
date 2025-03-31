@@ -28,8 +28,8 @@ export default function TextViewsContainer({filesOpen, setFilesOpen, setFileName
         <div
           key={index}
           onClick={() => {
-            setText(convertToReactElements(file.content || []));
             setFileNameFocus(file.name);
+            setText(convertToReactElements(file.content || []));
           }}
           className={`fileContainer ${
             fileNameFocus === file.name ? "fileNameFocus" : ""

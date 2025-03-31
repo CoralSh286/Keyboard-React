@@ -5,8 +5,9 @@ import { FaUser, FaSignOutAlt, FaSave, FaFile, FaTrash } from "react-icons/fa";
 import "./style.css";
 import SaveFilePopUp from "../SaveFilePopUp/SaveFilePopUp";
 import { removeFileFromUser } from "../../CommonFunction/SetLocalStorageData/setLocalStorageData";
+import convertToReactElements from "../../CommonFunction/ConvertToReactElements/ConvertToReactElements";
 
-export default function Header({ setIsLogin, setUser, user, text, setFilesOpen, openPopup, onClose, setFileNameFocus }) {
+export default function Header({ setIsLogin, setUser, user, text, setFilesOpen, openPopup, onClose, setFileNameFocus , setText }) {
   const handleLogout = () => {
     setIsLogin(false);
     setUser({})
@@ -23,6 +24,7 @@ export default function Header({ setIsLogin, setUser, user, text, setFilesOpen, 
       if (index !== -1) return [...perv]
       if (index === -1) return [...perv, file]
     })
+    setText(convertToReactElements(file.content))
 
   }
 

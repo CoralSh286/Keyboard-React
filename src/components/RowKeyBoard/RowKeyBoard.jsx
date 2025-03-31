@@ -2,24 +2,25 @@ import React from 'react'
 import KeyBoardBtn from '../KeyBoardBtn/KeyBoardBtn'
 import KeyBtnSelect from '../KeyBtnSelect/KeyBtnSelect'
 
-export default function RowKeyBoard(props) {
+export default function RowKeyBoard({arrOfRowChars,setIsGlow,stylingText,changeKeyBoard,setText,setStylingText,text}) {
   return (
     <div className='row'>
-      {props.arrOfRowChars?.map((char, index) => {
+      {arrOfRowChars?.map((char, index) => {
         if (char === 'Colors' || char === 'Size' || char === 'Fonts') {
           return <KeyBtnSelect 
-          stylingText={props.stylingText}
-          setStylingText={props.setStylingText}
+          stylingText={stylingText}
+          setStylingText={setStylingText}
           key={char + index} 
           char={char} />
         }
         else {
           return <KeyBoardBtn  
-          setIsGlow={props.setIsGlow}
-          stylingText={props.stylingText}
+          text={text}
+          setIsGlow={setIsGlow}
+          stylingText={stylingText}
            key={char + index}
-            changeKeyBoard={props.changeKeyBoard} 
-            setText={props.setText} 
+            changeKeyBoard={changeKeyBoard} 
+            setText={setText} 
             char={char}
              />
         }

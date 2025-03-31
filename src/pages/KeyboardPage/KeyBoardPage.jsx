@@ -72,6 +72,7 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
         setUser={setUser}
         openPopup={openPopup}
         setIsLogin={setIsLogin}
+        setText={setNewText}
       />
 
       <main>
@@ -91,7 +92,7 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
             openPopup={openPopup}
           />
         </div>
-        <KeyBoard setText={setNewText} />
+        <KeyBoard setText={setNewText} text={text} />
       </main>
 
       <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>

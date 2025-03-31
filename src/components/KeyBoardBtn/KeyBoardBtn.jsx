@@ -1,44 +1,45 @@
 import React from 'react'
 import './style.css'
 
-export default function KeyBoardBtn(props) {
+export default function KeyBoardBtn({setText, setIsGlow, changeKeyBoard, stylingText, char , text}) {
+  
   const onKeyPressHandel = (char) => {
     switch (char) {
       case 'delete':
-        return props.setText(prevText => prevText.slice(0, -1))
+        return setText(text.slice(0, -1))
       case 'Delete All':
-        return props.setText("")
+        return setText([])
       case 'Tab':
-        return props.setText(prevText => [...prevText, '    '])
+        return setText([...text, '    '])
       case 'RGB':
         console.log('RGB')
-        return props.setIsGlow(perv => perv === true ? false : true)
+        return setIsGlow(perv => perv === true ? false : true)
       case 'Enter':
-        return props.setText(prevText => [...prevText, <br key={prevText.length} />])
+        return setText([...text, <br key={text.length} />])
       case 'Shift':
       case 'Ctrl':
       case 'Alt':
         return
       case 'Space':
-        return props.setText(prevText => [...prevText, ' '])
+        return setText([...text, ' '])
       case 'He':
       case 'En':
       case 'emoji':
       case 'CapsLock':
-        return props.changeKeyBoard(char)
+        return changeKeyBoard(char)
       default:
-        return props.setText(prevText => [
-          ...prevText,
-          <span key={prevText.length} style={props.stylingText}>
-            {props.char}
+        return setText([
+          ...text,
+          <span key={text.length} style={stylingText}>
+            {char}
           </span>
         ])
     }
   }
 
   return (
-    <button className='keyBoardBtn' onClick={() => onKeyPressHandel(props.char)}>
-      {props.char}
+    <button className='keyBoardBtn' onClick={() => onKeyPressHandel(char)}>
+      {char}
     </button>
   )
 }

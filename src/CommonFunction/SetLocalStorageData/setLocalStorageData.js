@@ -89,7 +89,6 @@ const changeFileByName = (userName, fileName, fileContent) => {
   try {
     // Get all users
     const users = getUsers();
-    debugger
     // Find the user
     const userIndex = users.findIndex(user => user.username === userName);
     

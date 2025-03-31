@@ -3,7 +3,7 @@ import RowKeyBoard from '../RowKeyBoard/RowKeyBoard';
 import './style.css'
 import jsonKeyBoard from './keyBoards.json'
 
-export default function KeyBoard(props) {
+export default function KeyBoard({setText , text}) {
     const [isUpperCase, setIsUpperCase] = useState(true);
     const [keyBoard, setKeyBoard] = useState(jsonKeyBoard.upperEnglish);
     const [isGlow, setIsGlow] = useState(true);
@@ -35,9 +35,10 @@ export default function KeyBoard(props) {
                 keyBoard.map((arrOfKeys, i) => {
                     return <RowKeyBoard
                     setIsGlow={setIsGlow}
+                    text={text}
                         key={"RowKeyBoard" + i}
                         setIsUpperCase={setIsUpperCase}
-                        setText={props.setText}
+                        setText={setText}
                         setStylingText={setStylingText}
                         stylingText={stylingText}
                         changeKeyBoard={changeKeyBoard}
