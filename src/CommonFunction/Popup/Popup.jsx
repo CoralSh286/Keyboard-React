@@ -3,11 +3,11 @@ import { FaTimes } from 'react-icons/fa';
 import './style.css';
 
 export default function Popup({ 
-  isOpen = false, 
+  isPopupOpen = false, 
   onClose, 
   children 
 }) {
-  if (!isOpen) return null;
+  if (!isPopupOpen) return null;
   
   return (
     <div className="popup-overlay" onClick={onClose}>

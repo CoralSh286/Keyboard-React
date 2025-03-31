@@ -46,15 +46,18 @@ const addNewFileToUser = (username, fileData) => {
   }
 };
 const removeFileFromUser = (userName, fileName) => {
+  const users = getUsers();
+  const userIndex = users.findIndex(user => user.username === userName);
   
-        const users = getUsers()
-        const user = users.find(user => user.userName === userName);
-        if (user) {
-        user.files = user.files.filter(file => file.name !== fileName);
-        setUsers(users);
-        }
-    
-    }
+  if (userIndex !== -1) {
+      // Modify the user directly in the users array
+      users[userIndex].files = users[userIndex].files.filter(file => file.name !== fileName);
+      setUsers(users);
+      return true;
+  }
+  
+  return false;
+}
 const getUsers = () => {
   const usersString = localStorage.getItem("users");
   if (usersString) {
@@ -69,7 +72,11 @@ const checkLogin  = (username, password) => {
   
 
 }
-
+const getFileContent = (username , fileName )=>{
+  const user = getUserByName(username)
+  const {content} = user.files.find(file=> file.name == fileName)
+  return content
+}
 const addNewUser = (newUser) => {
   const users = getUsers();
   users.push(newUser);
@@ -131,4 +138,4 @@ const getUserByName = (username) => {
 }
 
 
-export { setUsers, addNewFileToUser,changeFileByName, removeFileFromUser, getUsers,checkLogin,addNewUser ,checkIfUserExists,getUserByName};
+export { setUsers, addNewFileToUser,changeFileByName, removeFileFromUser, getUsers,checkLogin,addNewUser ,checkIfUserExists,getUserByName,getFileContent};

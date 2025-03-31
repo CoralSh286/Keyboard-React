@@ -12,7 +12,6 @@ export default function KeyBoardBtn({setText, setIsGlow, changeKeyBoard, styling
       case 'Tab':
         return setText([...text, '    '])
       case 'RGB':
-        console.log('RGB')
         return setIsGlow(perv => perv === true ? false : true)
       case 'Enter':
         return setText([...text, <br key={text.length} />])

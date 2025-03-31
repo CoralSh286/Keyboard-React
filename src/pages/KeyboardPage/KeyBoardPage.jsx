@@ -17,8 +17,30 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
   const [popupContent, setPopupContent] = useState(null);
   const [change, setChange] = useState([]);
   const [filesOpen, setFilesOpen] = useState([]);
+  useEffect(() => {
+    if (filesOpen && filesOpen.length > 0) {
+      refreshOpenFilesData();
+    }
+  }, [user.files]);
+  const refreshOpenFilesData = () => {
+    if (!filesOpen || !user.files) return;
+    
+    // Create a new array with updated file data but only for already open files
+    const updatedOpenFiles = filesOpen.map(openFile => {
+      // Find the matching file in user.files
+      const updatedFile = user.files.find(userFile => userFile.name === openFile.name);
+      
 
-
+      return updatedFile || openFile;
+    });
+    
+    const filteredOpenFiles = updatedOpenFiles.filter(openFile => 
+      user.files.some(userFile => userFile.name === openFile.name)
+    );
+    
+    // Update filesOpen state with the refreshed data
+    setFilesOpen(filteredOpenFiles);
+  };
   const openPopup = (content) => {
     setPopupContent(content);
     setIsPopupOpen(true);
@@ -32,50 +54,58 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
         setUser(getUserByName(user.username))
       }
       setChange((prevChange) => [...prevChange, newText]);
+
   };
   const setTextWithoutHistory = (newText) => {
     setText(newText);
   };
 
+  const propsRef={
+    text:text ,
+    user:user,
+    onClose:() => {
+      setIsPopupOpen(false);
+    },
+    fileNameFocus:fileNameFocus,
+    setFilesOpen:setFilesOpen,
+    filesOpen:filesOpen,
+    setFileNameFocus:setFileNameFocus,
+    setUser:setUser,
+    openPopup:openPopup,
+    setIsLogin:setIsLogin,
+    setText:setNewText,
+    setTextWithoutHistory:setTextWithoutHistory,
+    setChange:setChange,
+    change:change,
+    isPopupOpen:isPopupOpen
 
+  }
 
   return (
     <>
       <Header
-        text={text}
-        user={user}
-        onClose={() => {
-          setIsPopupOpen(false);
-        }}
-        setFilesOpen={setFilesOpen}
-        setFileNameFocus={setFileNameFocus}
-        setUser={setUser}
-        openPopup={openPopup}
-        setIsLogin={setIsLogin}
-        setText={setNewText}
+  {...propsRef}
       />
 
       <main>
         <div className="flexDiv">
           <ChangeAllText
-            setText={setNewText}
-            text={text}
+          {...propsRef}
 
           />
-          <TextViewsContainer fileNameFocus={fileNameFocus} filesOpen={filesOpen} setFileNameFocus={setFileNameFocus} setFilesOpen={setFilesOpen} setText={setText} text={text} />
+          <TextViewsContainer 
+        {...propsRef}
+          setText={setText} 
+          
+          />
           <ActionsOnTextView
-            setChange={setChange}
-            change={change}
-            setText={setNewText}
-            text={text}
-            setTextWithoutHistory={setTextWithoutHistory}
-            openPopup={openPopup}
+       {...propsRef}
           />
         </div>
-        <KeyBoard setText={setNewText} text={text} />
+        <KeyBoard {...propsRef} />
       </main>
 
-      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+      <Popup {...propsRef}>
         {popupContent}
       </Popup>
     </>

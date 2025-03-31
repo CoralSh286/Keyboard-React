@@ -1,8 +1,9 @@
 import React from 'react'
 import convertToReactElements from '../../CommonFunction/ConvertToReactElements/ConvertToReactElements';
 import TextView from '../TextView/TextView';
+import { getFileContent } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
 
-export default function TextViewsContainer({filesOpen, setFilesOpen, setFileNameFocus, text, fileNameFocus, setText}) {
+export default function TextViewsContainer({filesOpen, setFilesOpen, setFileNameFocus, text, fileNameFocus, setText,user}) {
     
   const handleCloseFile = (index) => {
     const updatedFiles = [...filesOpen];
@@ -29,7 +30,7 @@ export default function TextViewsContainer({filesOpen, setFilesOpen, setFileName
           key={index}
           onClick={() => {
             setFileNameFocus(file.name);
-            setText(convertToReactElements(file.content || []));
+            setText(convertToReactElements(getFileContent(user.username, file.name) || []));
           }}
           className={`fileContainer ${
             fileNameFocus === file.name ? "fileNameFocus" : ""
