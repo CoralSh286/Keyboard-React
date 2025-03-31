@@ -1,8 +1,8 @@
 .keyboard {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding: 10px;
+    gap: 2px;
+    padding: 4px;
     background-color: #e3e3e3;
     border-radius: 10px;
     width: 80%;
@@ -57,8 +57,7 @@ height: 50px;
     border: 1px solid #444;
     color: white;
     font-size: 16px;
-    padding: 12px 18px;
-    min-width: 50px;
+    padding: 8px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     position: relative;

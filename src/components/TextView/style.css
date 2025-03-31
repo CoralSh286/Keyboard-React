@@ -2,7 +2,7 @@
     padding: 15px;
     border: 2px solid #444;
     border-radius: 8px;
-    height: 200px;
+    height: 180px;
     width: 100%; /* Changed from 50% to fill container */
     overflow: auto;
     font-size: 18px;
