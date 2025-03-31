@@ -24,24 +24,7 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
     setIsPopupOpen(true);
   };
 
-  // Function to update text and track changes
   const setNewText = (newText) => {
-    if (typeof newText === "function") {
-      setText((currentText) => {
-        const updatedText = newText(currentText);
-        if (fileNameFocus != "") {
-          user.files?.find(file => file.name == fileNameFocus)
-        }
-        if (fileNameFocus != "") {
-          const fileData = extractStyleAndText(updatedText)
-
-          changeFileByName(user.username, fileNameFocus, fileData)
-          setUser(getUserByName(user.username))
-        }
-        setChange((prevChange) => [...prevChange, updatedText]);
-        return updatedText;
-      });
-    } else {
       setText(newText);
       if (fileNameFocus != "") {
         const fileData = extractStyleAndText(newText)
@@ -49,12 +32,9 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
         setUser(getUserByName(user.username))
       }
       setChange((prevChange) => [...prevChange, newText]);
-    }
-
   };
   const setTextWithoutHistory = (newText) => {
     setText(newText);
-    // This doesn't update the change history
   };
 
 

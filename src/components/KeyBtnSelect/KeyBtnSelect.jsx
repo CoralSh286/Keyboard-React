@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './style.css'
 import selectOptions from './options.json'
 
-export default function KeyBtnSelect({char, stylingText}) {
+export default function KeyBtnSelect({char, stylingText,setStylingText}) {
   const options = selectOptions[char]
   const [isOpen, setIsOpen] = useState(false)
 
