@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Roberto';
-  src: url(../public/fonts/Roboto/static/Roboto_Condensed-Regular.ttf);
+  src: url(./fonts/Roboto/static/Roboto_Condensed-Regular.ttf);
 }
 body {
   font-family: Roberto;
