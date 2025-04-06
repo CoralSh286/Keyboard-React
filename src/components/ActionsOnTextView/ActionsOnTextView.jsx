@@ -6,6 +6,11 @@ import "./style.css";
 import SearchInChars from "../SearchInChars/SearchInChars";
 import ReplaceText from "../ReplaceText/ReplaceText";
 import reactElementsToString from "../../CommonFunction/ElementToStringConvertor/elementToStringConvertor";
+import { extractStyleAndText } from "../../CommonFunction/ExtarctTextAndStyle/extarctTextAndStyle";
+import {
+  changeFileByName,
+  getUserByName,
+} from "../../CommonFunction/SetLocalStorageData/setLocalStorageData";
 
 export default function ActionsOnTextView({
   openPopup,
@@ -14,6 +19,9 @@ export default function ActionsOnTextView({
   setTextWithoutHistory,
   change,
   setChange,
+  user,
+  fileNameFocus,
+  setUser,
 }) {
   const handleSearch = () => {
     openPopup(
@@ -35,6 +43,11 @@ export default function ActionsOnTextView({
     if (change && change.length > 1) {
       const previousText = change[change.length - 2];
       setTextWithoutHistory(previousText);
+      if (fileNameFocus != "") {
+        const fileData = extractStyleAndText(previousText);
+        changeFileByName(user.username, fileNameFocus, fileData);
+        setUser(getUserByName(user.username));
+      }
       setChange((prevChange) => prevChange.slice(0, -1));
     }
   };
