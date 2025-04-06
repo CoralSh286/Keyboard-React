@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { FaExchangeAlt } from "react-icons/fa";
 import "./style.css";
+import reactElementsToString from "../../CommonFunction/ElementToStringConvertor/elementToStringConvertor";
 
 export default function ReplaceText({ text, setText }) {
   const [findQuery, setFindQuery] = useState("");
@@ -25,22 +26,7 @@ export default function ReplaceText({ text, setText }) {
 
     // Count occurrences of findQuery in text
     let count = 0;
-    let tempText = "";
-
-    // For React element arrays, extract text content
-    if (Array.isArray(text)) {
-      for (const item of text) {
-        if (typeof item === "string") {
-          tempText += item;
-        } else if (item && item.props && item.props.children) {
-          if (typeof item.props.children === "string") {
-            tempText += item.props.children;
-          }
-        }
-      }
-    } else if (typeof text === "string") {
-      tempText = text;
-    }
+    let tempText = reactElementsToString(text);
 
     const findLower = findQuery.toLowerCase();
     const textLower = tempText.toLowerCase();
@@ -58,9 +44,6 @@ export default function ReplaceText({ text, setText }) {
   const handleReplaceAll = () => {
     if (!findQuery.trim() || !text) return;
     if (Array.isArray(text)) {
-      console.log("Replacing in array of React elements");
-
-      // Clone the array to avoid mutating the original
       const newElements = [];
       let modifiedText = false;
 
@@ -70,7 +53,6 @@ export default function ReplaceText({ text, setText }) {
 
         // Handle string elements
         if (typeof element === "string") {
-          console.log(`Processing string element at index ${i}:`, element);
           const regex = new RegExp(escapeRegExp(findQuery), "gi");
 
           if (regex.test(element)) {

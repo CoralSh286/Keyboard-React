@@ -22,7 +22,7 @@ export default function SearchInChars({ text }) {
     let index;
     const searchQueryLower = searchQuery.toLowerCase();
     const textLower = text.toLowerCase();
-    
+
     while ((index = textLower.indexOf(searchQueryLower, startIndex)) > -1) {
       foundIndices.push({
         index,
@@ -30,7 +30,6 @@ export default function SearchInChars({ text }) {
       });
       startIndex = index + 1;
     }
-    
     setResults(foundIndices);
     setIsSearching(false);
     
@@ -43,11 +42,6 @@ export default function SearchInChars({ text }) {
     }
   };
 
-  useEffect(() => {
-    setSearchQuery('');
-    setResults([]);
-  }, [text]);
-
   return (
     <div className="search-chars-container">
       <div className="search-input-wrapper">
@@ -57,7 +51,7 @@ export default function SearchInChars({ text }) {
           placeholder="Search in text..."
           value={searchQuery}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
         />
         <button 
           className="search-button"

@@ -37,7 +37,7 @@ export default function ChangeAllText({  text , setText }) {
       </label>
 
       <label>
-        <select  onChange={(e)=>{handelSelectChange("color", e.target.value)}}>
+        <select onChange={(e)=>{handelSelectChange("color", e.target.value)}}>
           {options.Colors.map((c) => (
             <option key={c} value={c}>
               {c}

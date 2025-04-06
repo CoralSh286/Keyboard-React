@@ -1,38 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import "./style.css"; // Assuming you have a CSS file for styling
+import "./style.css"; 
 import { addNewUser, checkIfUserExists, checkLogin, getUserByName } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
 
 export default function LoginPage({ setIsLogin , setUser }) {
-  // State for form inputs
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  
-  // Function to handle user login
+
   const handleLogin = (e) => {
-    e.preventDefault(); // Prevent form submission
-    
-    // Basic validation
+    e.preventDefault();
     if (!username || !password) {
       setError('Please enter both username and password');
       return;
     }
     
-    // Check login credentials
     const userAuth = checkLogin(username, password);
     const user = getUserByName(username);
     if (userAuth) {
-      // Successful login
       setError('');
       setIsLogin(true);
-      setUser(user); // Set user in state
+      setUser(user); 
     } else {
-      // Failed login
       setError('Invalid username or password');
     }
   };
   
-  // Function to create default users
   const handleRegister = (e) => {
     e.preventDefault();
     if(!username || !password) {

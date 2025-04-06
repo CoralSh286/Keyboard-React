@@ -16,6 +16,7 @@ export default function Header({ setIsLogin, setUser, user, text, setFilesOpen,f
   const handleSaveFile = () => {
     openPopup(<SaveFilePopUp onClose={onClose} file={text} userName={user.username} setUser={setUser} />);
   };
+
   const openNewFile = (file) => {
     setFileNameFocus(file.name);
     setFilesOpen(perv => {
@@ -27,9 +28,10 @@ export default function Header({ setIsLogin, setUser, user, text, setFilesOpen,f
     setTextWithoutHistory(convertToReactElements(file.content))
 
   }
-useEffect(()=>{
+  
+  useEffect(()=>{
+  },[user.files])
 
-},[user.files])
   const deleteFileHandler = (ev, file) => {
     ev.stopPropagation(); // Prevent opening the file
     // Delete file

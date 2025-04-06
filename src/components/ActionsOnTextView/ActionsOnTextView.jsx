@@ -4,8 +4,8 @@ import React from "react";
 import { FaUndo, FaSearch, FaExchangeAlt } from "react-icons/fa";
 import "./style.css";
 import SearchInChars from "../SearchInChars/SearchInChars";
-import reactElementsToString from "../../CommonFunction/ElementToStringConvertor/elementToStringConvertor";
 import ReplaceText from "../ReplaceText/ReplaceText";
+import reactElementsToString from "../../CommonFunction/ElementToStringConvertor/elementToStringConvertor";
 
 export default function ActionsOnTextView({
   openPopup,

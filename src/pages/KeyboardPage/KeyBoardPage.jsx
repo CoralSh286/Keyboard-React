@@ -10,9 +10,10 @@ import "./style.css";
 import TextViewsContainer from "../../components/TextViewsContainer/TextViewsContainer";
 import { changeFileByName, getUserByName } from "../../CommonFunction/SetLocalStorageData/setLocalStorageData";
 import { extractStyleAndText } from "../../CommonFunction/ExtarctTextAndStyle/extarctTextAndStyle";
+
 export default function KeyBoardPage({ setIsLogin, user, setUser }) {
-  const [fileNameFocus, setFileNameFocus] = useState([]);
   const [text, setText] = useState([]);
+  const [fileNameFocus, setFileNameFocus] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState(null);
   const [change, setChange] = useState([]);
@@ -22,15 +23,13 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
       refreshOpenFilesData();
     }
   }, [user.files]);
+
   const refreshOpenFilesData = () => {
     if (!filesOpen || !user.files) return;
-    
     // Create a new array with updated file data but only for already open files
     const updatedOpenFiles = filesOpen.map(openFile => {
       // Find the matching file in user.files
       const updatedFile = user.files.find(userFile => userFile.name === openFile.name);
-      
-
       return updatedFile || openFile;
     });
     
@@ -41,6 +40,7 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
     // Update filesOpen state with the refreshed data
     setFilesOpen(filteredOpenFiles);
   };
+
   const openPopup = (content) => {
     setPopupContent(content);
     setIsPopupOpen(true);
@@ -54,8 +54,8 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
         setUser(getUserByName(user.username))
       }
       setChange((prevChange) => [...prevChange, newText]);
-
   };
+
   const setTextWithoutHistory = (newText) => {
     setText(newText);
   };
@@ -86,12 +86,10 @@ export default function KeyBoardPage({ setIsLogin, user, setUser }) {
       <Header
   {...propsRef}
       />
-
       <main>
         <div className="flexDiv">
           <ChangeAllText
           {...propsRef}
-
           />
           <TextViewsContainer 
         {...propsRef}
