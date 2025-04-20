@@ -1,7 +1,5 @@
 /**
  * Converts various data formats to React elements
- * @param {Array|Object|string|null|undefined} data - The data to convert
- * @returns {React.ReactNode} - The converted React elements
  */
 const convertToReactElements = (data) => {
   // Handle null or undefined cases

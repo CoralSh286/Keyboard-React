@@ -65,7 +65,7 @@ height: 50px;
     font-weight: bold;
 }
 
-/* אפקט תאורת לד לכל הכפתורים */
+
 .keyboard.Glow .keyBoardBtn::after {
     content: "";
     position: absolute;
@@ -79,7 +79,6 @@ height: 50px;
     animation: glow 3s infinite linear;
 }
 
-/* אפקט מעבר צבעים ללדים */
 @keyframes glow {
     0% { box-shadow: 0 0 15px red; }
     25% { box-shadow: 0 0 15px blue; }
@@ -88,20 +87,20 @@ height: 50px;
     100% { box-shadow: 0 0 15px red; }
 }
 
-/* אפקט ריחוף */
+
 .keyboard.Glow .keyBoardBtn:hover {
     background: linear-gradient(135deg, #444, #555);
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
-/* אפקט לחיצה */
+
 .keyboard.Glow .keyBoardBtn:active {
     transform: scale(0.9);
     background: linear-gradient(135deg, #111, #222);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-/* עיצוב מיוחד לכפתורי הגדרות */
+
 .keyboard.Glow .KeyBtnSelect {
     color: cyan;
     font-size: 14px;

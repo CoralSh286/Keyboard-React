@@ -2,6 +2,7 @@ import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import './style.css';
 
+// A modal popup component with overlay, close button, and customizable content.
 export default function Popup({ 
   isPopupOpen = false, 
   onClose, 

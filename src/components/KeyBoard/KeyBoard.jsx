@@ -3,6 +3,12 @@ import RowKeyBoard from '../RowKeyBoard/RowKeyBoard';
 import './style.css'
 import jsonKeyBoard from './keyBoards.json'
 
+/**
+* KeyBoard Component
+* 
+* Virtual keyboard interface that allows users to input text.
+* Supports multiple keyboard layouts including English (upper and lowercase), Hebrew, and emojis.
+*/
 export default function KeyBoard({setText , text}) {
     const [isUpperCase, setIsUpperCase] = useState(true);
     const [keyBoard, setKeyBoard] = useState(jsonKeyBoard.upperEnglish);
@@ -12,6 +18,10 @@ export default function KeyBoard({setText , text}) {
         color: 'black',
         fontFamily: 'Arial'
     })
+
+     /**
+    * Changes the keyboard layout based on selection
+    */
     const changeKeyBoard = (changeTo) => {
         switch (changeTo) {
             case "He":

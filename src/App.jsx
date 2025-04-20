@@ -3,6 +3,12 @@ import "./App.css";
 import KeyBoardPage from "./pages/KeyboardPage/KeyBoardPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 
+/**
+ * App Component
+ * 
+ * Main application component that manages user authentication state.
+ * Renders either the Login page or the Keyboard page based on login status.
+ */
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({});

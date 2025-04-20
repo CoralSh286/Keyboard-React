@@ -7,16 +7,35 @@ import SaveFilePopUp from "../SaveFilePopUp/SaveFilePopUp";
 import { removeFileFromUser } from "../../CommonFunction/SetLocalStorageData/setLocalStorageData";
 import convertToReactElements from "../../CommonFunction/ConvertToReactElements/ConvertToReactElements";
 
+/**
+* Header Component
+* 
+* Displays the application header with user information, file navigation,
+* and action buttons (save and logout)
+*/
 export default function Header({ setIsLogin, setUser, user, text, setFilesOpen,filesOpen, openPopup, onClose, setFileNameFocus, setText, setTextWithoutHistory,fileNameFocus }) {
+
+   /**
+  * Handles user logout
+  * Resets login state and clears user data
+  */
   const handleLogout = () => {
     setIsLogin(false);
     setUser({})
   };
 
+   /**
+  * Opens the save file popup with current text content
+  */
   const handleSaveFile = () => {
     openPopup(<SaveFilePopUp onClose={onClose} file={text} userName={user.username} setUser={setUser} />);
   };
 
+   /**
+  * Opens a file for editing
+  * Sets file focus, adds to open files list if not already open,
+  * and loads file content into editor
+  */
   const openNewFile = (file) => {
     setFileNameFocus(file.name);
     setFilesOpen(perv => {
@@ -28,10 +47,11 @@ export default function Header({ setIsLogin, setUser, user, text, setFilesOpen,f
     setTextWithoutHistory(convertToReactElements(file.content))
 
   }
-  
-  useEffect(()=>{
-  },[user.files])
 
+   /**
+  * Handles file deletion
+  * Removes file from storage, updates user data, and handles UI state changes
+  */
   const deleteFileHandler = (ev, file) => {
     ev.stopPropagation(); // Prevent opening the file
     // Delete file

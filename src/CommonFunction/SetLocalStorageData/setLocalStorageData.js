@@ -1,13 +1,13 @@
+/**
+* Saves users array to localStorage
+*/
 const setUsers = (users) => {
   const usersString = JSON.stringify(users);
   localStorage.setItem("users", usersString);
 }
-// Function to add a new file to a user's files array
+
 /**
  * Adds a new file to a user's files array in localStorage
- * @param {string} username - The username of the user
- * @param {object} fileData - The file data to save
- * @returns {boolean} - Whether the operation was successful
  */
 const addNewFileToUser = (username, fileData) => {
   if (!username || !fileData) return false;
@@ -45,6 +45,11 @@ const addNewFileToUser = (username, fileData) => {
     return false;
   }
 };
+
+
+/**
+* Removes a file from a user's files array
+*/
 const removeFileFromUser = (userName, fileName) => {
   const users = getUsers();
   const userIndex = users.findIndex(user => user.username === userName);
@@ -58,6 +63,10 @@ const removeFileFromUser = (userName, fileName) => {
   
   return false;
 }
+
+/**
+* Retrieves all users from localStorage
+*/
 const getUsers = () => {
   const usersString = localStorage.getItem("users");
   if (usersString) {
@@ -65,28 +74,44 @@ const getUsers = () => {
   }
   return [];
 }
-const checkLogin  = (username, password) => {
 
+/**
+* Validates user login credentials
+*/
+const checkLogin  = (username, password) => {
     const users = getUsers();
     return users.some(user => user.username === username && user.password === password);
-  
-
 }
+
+/**
+* Gets the content of a specific file for a user
+*/
 const getFileContent = (username , fileName )=>{
   const user = getUserByName(username)
   const {content} = user.files.find(file=> file.name == fileName)
   return content
 }
+
+/**
+* Adds a new user to localStorage
+*/
 const addNewUser = (newUser) => {
   const users = getUsers();
   users.push(newUser);
   setUsers(users);
 }
+
+/**
+* Checks if a username already exists
+*/
 const checkIfUserExists = (username) => {
   const users = getUsers();
   return users.some(user => user.username === username);
 }
 
+/**
+* Updates the content of a specific file for a user
+*/
 const changeFileByName = (userName, fileName, fileContent) => {
   if (!userName || !fileName || fileContent === undefined) {
     console.error("Missing required parameters for ");
@@ -132,6 +157,10 @@ const changeFileByName = (userName, fileName, fileContent) => {
     return false;
   }
 };
+
+/**
+* Retrieves a user object by username
+*/
 const getUserByName = (username) => {
   const users = getUsers();
   return users.find(user => user.username === username);

@@ -2,6 +2,12 @@ import React from 'react'
 import KeyBoardBtn from '../KeyBoardBtn/KeyBoardBtn'
 import KeyBtnSelect from '../KeyBtnSelect/KeyBtnSelect'
 
+/**
+* RowKeyBoard Component
+* 
+* Renders a single row of the virtual keyboard.
+* Handles different types of keys including regular keys and dropdown selectors.
+*/
 export default function RowKeyBoard({arrOfRowChars,setIsGlow,stylingText,changeKeyBoard,setText,setStylingText,text}) {
   return (
     <div className='row'>

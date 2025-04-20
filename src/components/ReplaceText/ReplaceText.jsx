@@ -5,19 +5,35 @@ import { FaExchangeAlt } from "react-icons/fa";
 import "./style.css";
 import reactElementsToString from "../../CommonFunction/ElementToStringConvertor/elementToStringConvertor";
 
+/**
+ * ReplaceText Component
+ * 
+ * Provides text find and replace functionality with options to replace first occurrence
+ * or all occurrences of a specified text string.
+ */
 export default function ReplaceText({ text, setText }) {
   const [findQuery, setFindQuery] = useState("");
   const [replaceQuery, setReplaceQuery] = useState("");
   const [occurrences, setOccurrences] = useState(0);
 
+    /**
+   * Updates the find query when input changes
+   */
   const handleFindChange = (e) => {
     setFindQuery(e.target.value);
   };
 
+   /**
+   * Updates the replace query when input changes
+   */
   const handleReplaceChange = (e) => {
     setReplaceQuery(e.target.value);
   };
 
+   /**
+   * Calculates and updates the number of search query occurrences in text
+   * whenever the find query or text changes
+   */
   useEffect(() => {
     if (!findQuery.trim() || !text) {
       setOccurrences(0);
@@ -40,7 +56,10 @@ export default function ReplaceText({ text, setText }) {
     setOccurrences(count);
   }, [findQuery, text]);
 
-  // Replace all occurrences
+   /**
+   * Replaces all occurrences of findQuery with replaceQuery in text
+   * Handles different types of text content (arrays, strings, React elements)
+   */
   const handleReplaceAll = () => {
     if (!findQuery.trim() || !text) return;
     if (Array.isArray(text)) {
@@ -115,6 +134,10 @@ export default function ReplaceText({ text, setText }) {
     setReplaceQuery("");
   };
 
+   /**
+   * Replaces only the first occurrence of findQuery with replaceQuery in text
+   * Handles different types of text content (arrays, strings, React elements)
+   */
   const handleReplaceFirst = () => {
     if (!findQuery.trim() || !text) return;
 
@@ -200,7 +223,9 @@ export default function ReplaceText({ text, setText }) {
     }
   };
 
-  // Helper function to escape special characters for use in a regular expression
+    /**
+   * Helper function to escape special characters for use in a regular expression
+   */
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }

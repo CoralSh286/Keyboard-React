@@ -1,8 +1,18 @@
 import React from 'react'
 import './style.css'
 
+/**
+* KeyBoardBtn Component
+* 
+* Renders an individual button for the virtual keyboard.
+* Handles different key functions including text input, special operations, and keyboard layout changes.
+*/
 export default function KeyBoardBtn({setText, setIsGlow, changeKeyBoard, stylingText, char , text}) {
   
+   /**
+  * Handles key press actions based on character/function
+  * Performs different operations depending on the key type
+  */
   const onKeyPressHandel = (char) => {
     switch (char) {
       case 'delete':

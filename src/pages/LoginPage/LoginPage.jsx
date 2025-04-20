@@ -2,11 +2,21 @@ import React, { useState, useEffect } from 'react';
 import "./style.css"; 
 import { addNewUser, checkIfUserExists, checkLogin, getUserByName } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
 
+/**
+* LoginPage Component
+* 
+* Renders a login/registration form that allows users to authenticate or create a new account.
+* Manages form validation and user authentication through local storage.
+*/
 export default function LoginPage({ setIsLogin , setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  /**
+  * Handles user login submission
+  * Validates form inputs, authenticates user credentials, and updates app state on success
+  */
   const handleLogin = (e) => {
     e.preventDefault();
     if (!username || !password) {
@@ -25,6 +35,11 @@ export default function LoginPage({ setIsLogin , setUser }) {
     }
   };
   
+  /**
+  * Handles user registration
+  * Validates inputs, checks for existing username, creates new user account,
+  * and logs in the user automatically after successful registration
+  */
   const handleRegister = (e) => {
     e.preventDefault();
     if(!username || !password) {

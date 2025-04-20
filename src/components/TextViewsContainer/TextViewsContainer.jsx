@@ -3,8 +3,18 @@ import convertToReactElements from '../../CommonFunction/ConvertToReactElements/
 import TextView from '../TextView/TextView';
 import { getFileContent } from '../../CommonFunction/SetLocalStorageData/setLocalStorageData';
 
+/**
+* TextViewsContainer Component
+* 
+* Container component that manages and displays multiple text views for open files.
+* Handles file focus, file switching, and file closing operations.
+*/
 export default function TextViewsContainer({filesOpen, setFilesOpen, setFileNameFocus, text, fileNameFocus, setText,user}) {
     
+   /**
+  * Handles closing a file tab
+  * Updates the open files list and manages focus when a file is closed
+  */
   const handleCloseFile = (index) => {
     const updatedFiles = [...filesOpen];
     updatedFiles.splice(index, 1);

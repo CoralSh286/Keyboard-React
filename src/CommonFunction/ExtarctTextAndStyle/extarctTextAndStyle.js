@@ -1,7 +1,5 @@
 /**
  * Extracts style and text from a React element or array of elements
- * @param {React.Element|Array|string} element - The element(s) to process
- * @returns {Object|Array|null} - Extracted style and text
  */
 export const extractStyleAndText = (element) => {
     // Handle null or undefined

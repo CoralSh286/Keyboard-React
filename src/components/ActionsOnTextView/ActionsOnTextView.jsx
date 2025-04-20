@@ -7,11 +7,14 @@ import SearchInChars from "../SearchInChars/SearchInChars";
 import ReplaceText from "../ReplaceText/ReplaceText";
 import reactElementsToString from "../../CommonFunction/ElementToStringConvertor/elementToStringConvertor";
 import { extractStyleAndText } from "../../CommonFunction/ExtarctTextAndStyle/extarctTextAndStyle";
-import {
-  changeFileByName,
-  getUserByName,
-} from "../../CommonFunction/SetLocalStorageData/setLocalStorageData";
+import { changeFileByName, getUserByName } from "../../CommonFunction/SetLocalStorageData/setLocalStorageData";
 
+/**
+* ActionsOnTextView Component
+* 
+* Provides a toolbar with text manipulation actions such as undo, search, and replace.
+* Manages interaction with popups for search and replace operations.
+*/
 export default function ActionsOnTextView({
   openPopup,
   text,
@@ -23,6 +26,10 @@ export default function ActionsOnTextView({
   fileNameFocus,
   setUser,
 }) {
+
+   /**
+  * Opens search popup to find text in the current content
+  */
   const handleSearch = () => {
     openPopup(
       <>
@@ -31,6 +38,9 @@ export default function ActionsOnTextView({
     );
   };
 
+  /**
+  * Opens replace popup to find and replace text in the current content
+  */
   const handleReplace = () => {
     openPopup(
       <>
@@ -39,6 +49,10 @@ export default function ActionsOnTextView({
     );
   };
 
+   /**
+  * Reverts text to previous state and updates storage
+  * Uses the change history to restore previous version of the text
+  */
   const handleUndo = () => {
     if (change && change.length > 1) {
       const previousText = change[change.length - 2];

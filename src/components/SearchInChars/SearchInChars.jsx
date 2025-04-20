@@ -1,17 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import './style.css';
 
+/**
+* SearchInChars Component
+* 
+* Provides text search functionality to find occurrences of a search query within text content.
+* Displays search results with position indices and matched text.
+*/
 export default function SearchInChars({ text }) {
     
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
+   /**
+  * Updates the search query when input changes
+  */
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+   /**
+  * Executes the search operation
+  * Finds all occurrences of the search query in the text
+  * and populates results with position indices and matched text
+  */
   const handleSearch = () => {
     if (!searchQuery.trim() || !text) return;
     
@@ -32,10 +46,12 @@ export default function SearchInChars({ text }) {
     }
     setResults(foundIndices);
     setIsSearching(false);
-    
-    console.log(`Found ${foundIndices.length} matches for "${searchQuery}"`);
+  
   };
 
+   /**
+  * Triggers search when Enter key is pressed
+  */
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearch();
