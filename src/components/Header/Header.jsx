@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React  from "react";
 import { FaUser, FaSignOutAlt, FaSave, FaFile, FaTrash } from "react-icons/fa";
 import "./style.css";
 import SaveFilePopUp from "../SaveFilePopUp/SaveFilePopUp";

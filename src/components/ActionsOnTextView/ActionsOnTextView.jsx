@@ -22,6 +22,7 @@ export default function ActionsOnTextView({
   setTextWithoutHistory,
   change,
   setChange,
+  onClose,
   user,
   fileNameFocus,
   setUser,
@@ -44,7 +45,7 @@ export default function ActionsOnTextView({
   const handleReplace = () => {
     openPopup(
       <>
-        <ReplaceText setText={setText} text={text} />
+        <ReplaceText onClose={onClose} setText={setText} text={text} />
       </>
     );
   };

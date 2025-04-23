@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaExchangeAlt } from "react-icons/fa";
 import "./style.css";
 import reactElementsToString from "../../CommonFunction/ElementToStringConvertor/elementToStringConvertor";
@@ -11,7 +11,7 @@ import reactElementsToString from "../../CommonFunction/ElementToStringConvertor
  * Provides text find and replace functionality with options to replace first occurrence
  * or all occurrences of a specified text string.
  */
-export default function ReplaceText({ text, setText }) {
+export default function ReplaceText({ text, setText , onClose }) {
   const [findQuery, setFindQuery] = useState("");
   const [replaceQuery, setReplaceQuery] = useState("");
   const [occurrences, setOccurrences] = useState(0);
@@ -28,13 +28,14 @@ export default function ReplaceText({ text, setText }) {
    */
   const handleReplaceChange = (e) => {
     setReplaceQuery(e.target.value);
+    setFondedOccurrences();
   };
 
    /**
    * Calculates and updates the number of search query occurrences in text
    * whenever the find query or text changes
    */
-  useEffect(() => {
+  const setFondedOccurrences = () => {
     if (!findQuery.trim() || !text) {
       setOccurrences(0);
       return;
@@ -54,8 +55,8 @@ export default function ReplaceText({ text, setText }) {
     }
 
     setOccurrences(count);
-  }, [findQuery, text]);
-
+  }
+ 
    /**
    * Replaces all occurrences of findQuery with replaceQuery in text
    * Handles different types of text content (arrays, strings, React elements)
@@ -132,6 +133,8 @@ export default function ReplaceText({ text, setText }) {
 
     setFindQuery("");
     setReplaceQuery("");
+    onClose()
+
   };
 
    /**
@@ -221,6 +224,8 @@ export default function ReplaceText({ text, setText }) {
         setText(newText);
       }
     }
+    onClose()
+
   };
 
     /**
