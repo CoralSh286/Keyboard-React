@@ -71,25 +71,8 @@ export default function ReplaceText({ text, setText , onClose }) {
       for (let i = 0; i < text.length; i++) {
         const element = text[i];
 
-        // Handle string elements
-        if (typeof element === "string") {
-          const regex = new RegExp(escapeRegExp(findQuery), "gi");
-
-          if (regex.test(element)) {
-            regex.lastIndex = 0;
-            const newString = element.replace(regex, replaceQuery);
-            console.log(
-              `Replaced in string element. Before: "${element}", After: "${newString}"`
-            );
-            newElements.push(newString);
-            modifiedText = true;
-          } else {
-            newElements.push(element);
-          }
-        }
         // Handle React elements
-        else if (element && typeof element === "object" && element.$$typeof) {
-          console.log(`Processing React element at index ${i}`);
+         if (element && typeof element === "object" && element.$$typeof) {
 
           if (element.props && typeof element.props.children === "string") {
             const childText = element.props.children;
@@ -99,8 +82,6 @@ export default function ReplaceText({ text, setText , onClose }) {
               // Reset regex state after testing
               regex.lastIndex = 0;
               const newChildText = childText.replace(regex, replaceQuery);
-
-              console.log(`Replaced`, element.props.style);
               const newElement = React.cloneElement(element, {
                 ...element.props,
                 children: newChildText,
@@ -122,13 +103,7 @@ export default function ReplaceText({ text, setText , onClose }) {
 
       if (modifiedText) {
         setText(newElements);
-      } else {
-        console.log("No modifications were made to any element");
-      }
-    } else if (typeof text === "string") {
-      const regex = new RegExp(escapeRegExp(findQuery), "gi");
-      const newText = text.replace(regex, replaceQuery);
-      setText(newText);
+      } 
     }
 
     setFindQuery("");
@@ -145,37 +120,12 @@ export default function ReplaceText({ text, setText , onClose }) {
     if (!findQuery.trim() || !text) return;
 
     if (Array.isArray(text)) {
-      console.log("Replacing first occurrence in array of React elements");
-
       const newElements = [...text];
       let replaced = false;
 
       for (let i = 0; i < text.length && !replaced; i++) {
         const element = text[i];
-
-        if (typeof element === "string") {
-          console.log(`Processing string element at index ${i}:`, element);
-          const regex = new RegExp(escapeRegExp(findQuery), "i");
-          const match = element.match(regex);
-
-          if (match) {
-            const index = match.index;
-            const matchedText = match[0]; // The actual text that matched
-            const newString =
-              element.substring(0, index) +
-              replaceQuery +
-              element.substring(index + matchedText.length);
-
-            console.log(
-              `Replaced in string. Before: "${element}", After: "${newString}"`
-            );
-            newElements[i] = newString;
-            replaced = true;
-          }
-        }
-        // Handle React elements
-        else if (element && typeof element === "object" && element.$$typeof) {
-          console.log(`Processing React element at index ${i}`);
+        if (element && typeof element === "object" && element.$$typeof) {
 
           if (element.props && typeof element.props.children === "string") {
             const childText = element.props.children;
@@ -200,30 +150,10 @@ export default function ReplaceText({ text, setText , onClose }) {
           }
         }
       }
-
       if (replaced) {
-        console.log(
-          "First occurrence was replaced, setting new elements array"
-        );
         setText(newElements);
-      } else {
-        console.log("No replacements were made");
       }
-    } else if (typeof text === "string") {
-      // Simple case: string text
-      const regex = new RegExp(escapeRegExp(findQuery), "i");
-      const match = text.match(regex);
-
-      if (match) {
-        const index = match.index;
-        const matchedText = match[0];
-        const newText =
-          text.substring(0, index) +
-          replaceQuery +
-          text.substring(index + matchedText.length);
-        setText(newText);
-      }
-    }
+    } 
     onClose()
 
   };
